@@ -29,11 +29,10 @@ public class CourseService {
     }
 
 
-    public String addCourse(Course course){
+    public String addCourse(int id, String title, String description){
         try{
-            courseRepository.save(course);
+            courseRepository.save(new Course(id,title,description));
         }catch (Exception e){
-            LOGGER.error(e.getMessage());
             return "An error has occured : " + e.getMessage();
         }
         return "The course have been added";

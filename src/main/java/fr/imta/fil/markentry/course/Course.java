@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Course implements Persistable<Integer> {
 
     @Id
-    public int courseId;
+    private int courseId;
 
     private String title;
 
@@ -17,6 +17,16 @@ public class Course implements Persistable<Integer> {
 
     @Transient
     private boolean isNew = false;
+
+    public Course(){
+    }
+
+    public Course(int courseId, String title, String description) {
+        this.courseId = courseId;
+        this.title = title;
+        this.description = description;
+        this.isNew = true;
+    }
 
     @Override
     public Integer getId() {
