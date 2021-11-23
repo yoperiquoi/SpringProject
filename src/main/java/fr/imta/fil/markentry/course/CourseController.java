@@ -28,12 +28,12 @@ public class CourseController {
 
     @GetMapping("/courses")
     public List<Course> findAllCourse(){
-         return courseService.findAllCourses();
+        return courseService.findAllCourses();
     }
 
     @PostMapping("/courses")
     public String addCourse(@RequestBody Course course){
-         return courseService.addCourse(course);
+        return courseService.addCourse(course);
     }
 
 }

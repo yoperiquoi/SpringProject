@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Course implements Persistable<Integer> {
 
     @Id
-    private int courseId;
+    public int courseId;
 
     private String title;
 
@@ -50,5 +50,10 @@ public class Course implements Persistable<Integer> {
 
     public void setNew(boolean aNew) {
         isNew = aNew;
+    }
+
+    @Override
+    public String toString(){
+        return courseId + " : " + title + " " + description;
     }
 }
