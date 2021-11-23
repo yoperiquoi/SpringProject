@@ -23,8 +23,18 @@ public class CourseService {
 
     public Optional<Course> findCourseById(int id){return courseRepository.findById(id);}
 
-    public List<Course> findAllAccounts(){
+    public List<Course> findAllCourses(){
         return ListUtils.asList(courseRepository.findAll());
+    }
+
+    public String addCourse(Course course){
+        try{
+            courseRepository.save(course);
+        }catch (Exception e){
+            LOGGER.error(e.getMessage());
+            return "An error has occured : " + e.getMessage();
+        }
+        return "The course have been added";
     }
 
 }

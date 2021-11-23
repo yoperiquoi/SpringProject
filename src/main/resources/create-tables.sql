@@ -3,20 +3,20 @@ DROP TABLE Course;
 DROP TABLE Follow;
 
 CREATE TABLE Student (
-    student_id SERIAL PRIMARY KEY,
+    student_id INT PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL
 );
 
 CREATE TABLE Course (
-    course_id SERIAL PRIMARY KEY,
+    course_id INT PRIMARY KEY,
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL
 );
 
 CREATE TABLE Follow (
-    student_id SERIAL NOT NULL,
-    course_id SERIAL NOT NULL,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
     evaluation INT NOT NULL CHECK (evaluation>=0 AND evaluation<=20),
     CONSTRAINT PK_Follow PRIMARY KEY(student_id,course_id),
     CONSTRAINT FK_Student FOREIGN KEY (student_id) REFERENCES Student(student_id),

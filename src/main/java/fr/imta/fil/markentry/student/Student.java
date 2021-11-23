@@ -5,8 +5,10 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
+
 @Table("student")
 public class Student implements Persistable<Integer> {
+
 
     @Id
     private int studentId;
