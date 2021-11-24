@@ -5,11 +5,20 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
+/**
+ * This class is the course table ORM (Object-Relationnal Mapping).
+ * @author Yoann Periquoi, Matteo Ordrenneau, Jules Carpio.
+ * @version 1.0
+ * @since 22/11/2021
+ *
+ */
+
+
 @Table("course")
 public class Course implements Persistable<Integer> {
 
     @Id
-    public int courseId;
+    private int courseId;
 
     private String title;
 
@@ -18,40 +27,91 @@ public class Course implements Persistable<Integer> {
     @Transient
     private boolean isNew = false;
 
+    public Course(){
+    }
+
+    /**
+     * Constructor method.
+     * @param courseId - ID of the course
+     * @param title - Title of the course
+     * @param description - Main description of the course
+     */
+    public Course(int courseId, String title, String description) {
+        this.courseId = courseId;
+        this.title = title;
+        this.description = description;
+        this.isNew = true;
+    }
+
+    /**
+     * Getter of courseId
+     * @return courseId as an Integer.
+     */
     @Override
     public Integer getId() {
         return courseId;
     }
 
+    /**
+     * Getter of isNew
+     * @return isNew as an Boolean.
+     */
     @Override
     public boolean isNew() {
         return isNew;
     }
 
+    /**
+     * Setter of courseId
+     * @param courseId - ID of the course
+     */
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
+    /**
+     * Getter of title
+     * @return title as a String
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Setter of title
+     * @param title - Title of the course
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Getter of description
+     * @return description as a String
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Setter description
+     * @param description - Main description of the course
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Setter of isNew
+     * @param aNew - New booelan value of isNew
+     */
     public void setNew(boolean aNew) {
         isNew = aNew;
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String toString(){
         return courseId + " : " + title + " " + description;

@@ -5,6 +5,13 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
+/**
+ * This class is the student table ORM (Object-Relationnal Mapping).
+ * @author Yoann Periquoi, Matteo Ordrenneau, Jules Carpio.
+ * @version 1.0
+ * @since 22/11/2021
+ *
+ */
 
 @Table("student")
 public class Student implements Persistable<Integer> {
@@ -19,6 +26,7 @@ public class Student implements Persistable<Integer> {
 
     @Transient
     private boolean isNew = false;
+
 
     @Override
     public Integer getId() {
