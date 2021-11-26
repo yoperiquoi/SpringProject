@@ -1,5 +1,6 @@
 package fr.imta.fil.markentry.course;
 
+import fr.imta.fil.markentry.student.Student;
 import fr.imta.fil.markentry.utils.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,5 +38,7 @@ public class CourseService {
         }
         return "The course have been added";
     }
+
+    public List<Course> findCoursesByStudent(Student student) { return null;}
 
 }

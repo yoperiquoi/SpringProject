@@ -1,9 +1,14 @@
 package fr.imta.fil.markentry.student;
 
+import fr.imta.fil.markentry.course.Course;
+import fr.imta.fil.markentry.course.CourseRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.*;
 
 /**
  * This class is the student table ORM (Object-Relationnal Mapping).
@@ -27,6 +32,12 @@ public class Student implements Persistable<Integer> {
     @Transient
     private boolean isNew;
 
+    @MappedCollection(idColumn = "student_id", keyColumn = "student_id")
+    private Set<CourseRef> courses;
+
+    public void addCourse(CourseRef courseRef) {
+        courses.add(courseRef);
+    }
 
     /**
      * Constructor method.
@@ -99,10 +110,15 @@ public class Student implements Persistable<Integer> {
         this.lastname = lastname;
     }
 
-    /**
-     * Setter of isNew
-     * @param aNew - New boolean value of isNew
-     */
+
+    public Set<CourseRef> getCourses() {
+        return this.courses;
+    }
+
+    public void setCourses(Set<CourseRef> courses) {
+        this.courses = courses;
+    }
+
     public void setNew(boolean aNew) {
         isNew = aNew;
     }

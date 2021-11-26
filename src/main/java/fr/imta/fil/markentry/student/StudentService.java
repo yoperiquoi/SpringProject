@@ -22,7 +22,11 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Optional<Student> findStudentById(Integer id){ return studentRepository.findById(id); }
+    public Optional<Student> findStudentById(Integer id){
+        return studentRepository.findById(id);
+    }
 
-    public List<Student> findAllStudents() { return ListUtils.asList(studentRepository.findAll());}
+    public List<Student> findAllStudents() {
+        return ListUtils.asList(studentRepository.findAll());
+    }
 }
