@@ -1,6 +1,6 @@
-DROP TABLE Student;
-DROP TABLE Course;
-DROP TABLE Follow;
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Follow;
 
 CREATE TABLE Student (
     student_id INT PRIMARY KEY,
@@ -23,11 +23,9 @@ CREATE TABLE Follow (
     CONSTRAINT FK_Course FOREIGN KEY (course_id) REFERENCES Course(course_id)
 );
 
-
-
 INSERT INTO Student VALUES(1,'Yoann','PERIQUOI');
 INSERT INTO Student VALUES(2,'Matteo','ORDRENNEAU');
-INSERT INTO Student VALUES(3,'Jules','CARPIO');
+INSERT INTO Student VALUES(3,'Duane','CARPIO');
 INSERT INTO Student VALUES(4,'Matthis','HOULES');
 INSERT INTO Student VALUES(5,'Thomas','HAMMON');
 INSERT INTO Student VALUES(6,'Yassine','SMARA');
