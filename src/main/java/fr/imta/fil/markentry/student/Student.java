@@ -8,10 +8,7 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class is the student table ORM (Object-Relationnal Mapping).
@@ -35,11 +32,11 @@ public class Student implements Persistable<Integer> {
     @Transient
     private boolean isNew = false;
 
-    @MappedCollection(idColumn = "student_id")
-    private Set<CourseRef> courses = new HashSet<>();
+    @MappedCollection(idColumn = "student_id", keyColumn = "student_id")
+    private Set<CourseRef> courses;
 
-    public void addCourse(Course course) {
-        courses.add(new CourseRef(course.getId()));
+    public void addCourse(CourseRef courseRef) {
+        courses.add(courseRef);
     }
 
     @Override

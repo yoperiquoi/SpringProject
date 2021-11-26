@@ -7,6 +7,9 @@ public class CourseRef {
 
     private Integer courseId;
 
+    public CourseRef() {
+    }
+
     public CourseRef(Integer courseId) {
         this.courseId = courseId;
     }
