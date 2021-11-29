@@ -1,9 +1,13 @@
 package fr.imta.fil.markentry.course;
 
+import fr.imta.fil.markentry.follow.StudentRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.Set;
 
 /**
  * This class is the course table ORM (Object-Relationnal Mapping).
@@ -27,8 +31,11 @@ public class Course implements Persistable<Integer> {
     @Transient
     private boolean isNew = false;
 
-    public Course(){
-    }
+
+    /**
+     * Empty constructor method to instantiate automatically the spring applicaiton
+     */
+    public Course(){}
 
     /**
      * Constructor method.
@@ -41,6 +48,13 @@ public class Course implements Persistable<Integer> {
         this.title = title;
         this.description = description;
         this.isNew = true;
+    }
+
+    @MappedCollection(idColumn = "course_id", keyColumn = "course_id")
+    private Set<StudentRef> students;
+
+    public void addCourse(StudentRef studentRef) {
+        students.add(studentRef);
     }
 
     /**
@@ -103,13 +117,22 @@ public class Course implements Persistable<Integer> {
 
     /**
      * Setter of isNew
-     * @param aNew - New booelan value of isNew
+     * @param aNew - New boolean value of isNew
      */
     public void setNew(boolean aNew) {
         isNew = aNew;
     }
 
+    public Set<StudentRef> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<StudentRef> students) {
+        this.students = students;
+    }
+
     /**
+     * toString method
      * @return String
      */
     @Override
