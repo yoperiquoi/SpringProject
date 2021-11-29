@@ -1,6 +1,6 @@
 package fr.imta.fil.markentry.course;
 
-import fr.imta.fil.markentry.student.StudentRef;
+import fr.imta.fil.markentry.follow.StudentRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;

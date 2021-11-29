@@ -1,7 +1,6 @@
 package fr.imta.fil.markentry.student;
 
-import fr.imta.fil.markentry.course.Course;
-import fr.imta.fil.markentry.course.CourseRef;
+import fr.imta.fil.markentry.follow.CourseRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -68,7 +67,6 @@ public class Student implements Persistable<Integer> {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
 
     public Set<CourseRef> getCourses() {
         return this.courses;

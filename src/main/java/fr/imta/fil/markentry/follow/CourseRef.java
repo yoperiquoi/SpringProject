@@ -1,16 +1,18 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.follow;
 
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("follow")
 public class CourseRef {
 
-    private Integer courseId;
+    @Column("course_id")
+    public Integer courseId;
 
-    public CourseRef() {
+    public CourseRef(){
     }
 
-    public CourseRef(Integer courseId) {
+    public CourseRef(Integer courseId){
         this.courseId = courseId;
     }
 
