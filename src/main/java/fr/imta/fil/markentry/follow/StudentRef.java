@@ -1,10 +1,12 @@
-package fr.imta.fil.markentry.student;
+package fr.imta.fil.markentry.follow;
 
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("follow")
 public class StudentRef {
 
+    @Column("student_id")
     private Integer studentId;
 
     public StudentRef() {
