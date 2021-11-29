@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,8 +39,12 @@ public class CourseController {
     }
 
     @PostMapping("/courses")
-    public String addCourse(@RequestBody Course request){
-        return courseService.addCourse(request.getId(),request.getTitle(),request.getDescription());
+    public ResponseEntity<String> addCourse(@RequestBody CourseForm courseForm){
+        if(courseService.validateRequestBody(courseForm)){
+            return ResponseEntity.ok(courseService.addCourse(courseForm));
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

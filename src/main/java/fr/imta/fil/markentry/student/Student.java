@@ -32,7 +32,7 @@ public class Student implements Persistable<Integer> {
     private boolean isNew;
 
     @MappedCollection(idColumn = "student_id", keyColumn = "student_id")
-    private Set<CourseRef> courses;
+    private Set<CourseRef> courses = new HashSet<>();
 
     public void addCourse(CourseRef courseRef) {
         courses.add(courseRef);

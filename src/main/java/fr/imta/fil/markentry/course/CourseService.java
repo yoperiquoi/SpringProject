@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -40,17 +41,27 @@ public class CourseService {
         return ListUtils.asList(courseRepository.findAll());
     }
 
-
-    public String addCourse(int id, String title, String description){
-        try{
-            courseRepository.save(new Course(id,title,description));
-        }catch (Exception e){
-            return "An error has occured : " + e.getMessage();
+    @Transactional(rollbackFor = Exception.class)
+    public String addCourse(CourseForm courseForm) {
+        if(this.courseRepository.findById(courseForm.getCourseId()).isPresent()){
+            return "Un cours est déjà référencé à cet ID";
+        } else {
+            try {
+                Course course = new Course(courseForm.getCourseId(), courseForm.getTitle(), courseForm.getDescription());
+                for(Student student : courseForm.getStudents()){
+                    if(this.studentRepository.findById(student.getId()).isEmpty()){
+                        this.studentRepository.save(student);
+                    }
+                    course.addStudent(new StudentRef(student.getId()));
+                }
+                courseRepository.save(course);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-        return "The course have been added";
-    }
+        return "Le cours à bien été ajouté ainsi que les élèves assignés";
 
-    public List<Course> findCoursesByStudent(Student student) { return null;}
+    }
 
     public CourseResponse ConvertCourseToCourseResponse(Course course) {
         CourseResponse courseResponse = new CourseResponse(course.getId(), course.getTitle(), course.getDescription());
@@ -61,6 +72,23 @@ public class CourseService {
         }
         courseResponse.setStudents(students);
         return courseResponse;
+    }
+
+    public boolean validateRequestBody(CourseForm courseForm) {
+        boolean valid = (
+            courseForm.getCourseId() != null
+            && courseForm.getTitle() != null
+            && courseForm.getDescription() != null
+            && courseForm.getStudents() != null
+        );
+        if(courseForm.getStudents() != null) {
+            for(Student student : courseForm.getStudents()){
+                if(student.getId() == null || student.getFirstname() == null || student.getLastname() == null){
+                    return false;
+                }
+            }
+        }
+        return valid;
     }
 
 }
