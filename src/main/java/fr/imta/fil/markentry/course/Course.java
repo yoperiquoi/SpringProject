@@ -31,8 +31,11 @@ public class Course implements Persistable<Integer> {
     @Transient
     private boolean isNew = false;
 
-    public Course(){
-    }
+
+    /**
+     * Empty constructor method to instantiate automatically the spring applicaiton
+     */
+    public Course(){}
 
     /**
      * Constructor method.
@@ -114,7 +117,7 @@ public class Course implements Persistable<Integer> {
 
     /**
      * Setter of isNew
-     * @param aNew - New booelan value of isNew
+     * @param aNew - New boolean value of isNew
      */
     public void setNew(boolean aNew) {
         isNew = aNew;
@@ -129,6 +132,7 @@ public class Course implements Persistable<Integer> {
     }
 
     /**
+     * toString method
      * @return String
      */
     @Override
