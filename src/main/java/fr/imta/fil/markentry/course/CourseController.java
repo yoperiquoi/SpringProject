@@ -47,4 +47,13 @@ public class CourseController {
         }
     }
 
+    @DeleteMapping("/courses/{courseId}")
+    public ResponseEntity<String> delete(@PathVariable("courseId") Integer id){
+        if(courseService.findCourseById(id).isPresent()){
+            return ResponseEntity.ok(courseService.deleteCourseById(id));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
