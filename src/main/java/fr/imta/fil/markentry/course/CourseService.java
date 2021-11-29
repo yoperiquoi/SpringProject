@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class CourseService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CourseService.class);
 
     private CourseRepository courseRepository;
 
@@ -42,25 +42,37 @@ public class CourseService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public String addCourse(CourseForm courseForm) {
+    public boolean addCourse(CourseForm courseForm) throws Exception{
         if(this.courseRepository.findById(courseForm.getCourseId()).isPresent()){
-            return "Un cours est déjà référencé à cet ID";
+            LOGGER.warn("A course with id " + courseForm.getCourseId() + " already exits");
+            throw new Exception("A course with id " + courseForm.getCourseId() + " already exits");
         } else {
             try {
                 Course course = new Course(courseForm.getCourseId(), courseForm.getTitle(), courseForm.getDescription());
                 for(Student student : courseForm.getStudents()){
                     if(this.studentRepository.findById(student.getId()).isEmpty()){
+                        LOGGER.info("The student with id " + student.getId() + " has been added");
                         this.studentRepository.save(student);
                     }
                     course.addStudent(new StudentRef(student.getId()));
                 }
                 courseRepository.save(course);
+                return true;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                throw new Exception("An error occured during adding the course " + courseForm.getCourseId() + " : " + e.getMessage());
             }
         }
-        return "Le cours à bien été ajouté ainsi que les élèves assignés";
+    }
 
+    public String deleteCourseById(Integer id){
+        try {
+            courseRepository.deleteById(id);
+            LOGGER.info("The course " + id + " has been deleted");
+        } catch (Exception e) {
+            LOGGER.error("There has been an error deleting the course " + id + " : " + e.getMessage());
+            return "Un erreur est survenue : " + e.getMessage();
+        }
+        return "Le cours à été supprimé";
     }
 
     public CourseResponse ConvertCourseToCourseResponse(Course course) {

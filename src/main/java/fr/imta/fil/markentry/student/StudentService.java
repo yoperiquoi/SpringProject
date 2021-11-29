@@ -5,6 +5,7 @@ import fr.imta.fil.markentry.course.CourseRepository;
 import fr.imta.fil.markentry.course.CourseResponse;
 import fr.imta.fil.markentry.course.CourseService;
 import fr.imta.fil.markentry.follow.CourseRef;
+import fr.imta.fil.markentry.follow.FollowRepository;
 import fr.imta.fil.markentry.follow.StudentRef;
 import fr.imta.fil.markentry.utils.ListUtils;
 import org.slf4j.Logger;
@@ -27,10 +28,13 @@ public class StudentService {
 
     private CourseRepository courseRepository;
 
+    private FollowRepository followRepository;
+
     @Autowired
-    public StudentService(StudentRepository studentRepository, CourseRepository courseRepository){
+    public StudentService(StudentRepository studentRepository, CourseRepository courseRepository, FollowRepository followRepository){
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
+        this.followRepository = followRepository;
     }
 
     public Optional<Student> findStudentById(Integer id){
@@ -47,6 +51,16 @@ public class StudentService {
 
     public List<Student> findAllStudentsWithEvaluationLessOrEqual(Integer mark){
         return ListUtils.asList(studentRepository.findAllStudentWithMarkLessOrEqual(mark));
+    }
+
+    public boolean modifyStudentEvaluation(StudentEvaluationForm studentEvaluationForm){
+        try {
+            this.followRepository.modifyStudentEvaluation(studentEvaluationForm.getEvaluation(), studentEvaluationForm.getStudentId(), studentEvaluationForm.getCourseId());
+            return true;
+        } catch(Exception e){
+            LOGGER.info(e.getMessage());
+            return false;
+        }
     }
 
     public StudentResponse ConvertStudentToStudentResponse(Student student) {
