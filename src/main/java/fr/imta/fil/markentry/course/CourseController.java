@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/course")
@@ -21,14 +23,17 @@ public class CourseController {
     }
 
     @GetMapping("/courses/{courseId}")
-    public ResponseEntity<Course> findCourseId(@PathVariable("courseId") int id){
+    public ResponseEntity<CourseResponse> findCourseId(@PathVariable("courseId") int id){
         Optional<Course> courseById = courseService.findCourseById(id);
-        return courseById.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
+        return courseById.map(
+                course -> ResponseEntity.ok(courseService.ConvertCourseToCourseResponse(course)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/courses")
-    public List<Course> findAllCourse(){
-        return courseService.findAllCourses();
+    public List<CourseResponse> findAllCourse(){
+        List<Course> courses = courseService.findAllCourses();
+        return courses.stream().map(courseService::ConvertCourseToCourseResponse).collect(Collectors.toList());
     }
 
     @PostMapping("/courses")

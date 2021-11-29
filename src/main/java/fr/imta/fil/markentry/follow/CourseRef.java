@@ -7,12 +7,12 @@ import org.springframework.data.relational.core.mapping.Table;
 public class CourseRef {
 
     @Column("course_id")
-    public Integer courseId;
+    private Integer courseId;
 
     public CourseRef(){
     }
 
-    public CourseRef(Integer courseId){
+    public CourseRef(Integer courseId, String name){
         this.courseId = courseId;
     }
 

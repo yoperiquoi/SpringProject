@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/student")
@@ -24,19 +25,30 @@ public class StudentController {
     }
 
     @GetMapping("/students/{studentId}")
-    public ResponseEntity<Student> findStudentId(@PathVariable("studentId") Integer studentId){
+    public ResponseEntity<StudentResponse> findStudentId(@PathVariable("studentId") Integer studentId){
         Optional<Student> findStudentById = studentService.findStudentById(studentId);
-        return findStudentById.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return findStudentById.map(
+                student -> ResponseEntity.ok(this.studentService.ConvertStudentToStudentResponse(student)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/students")
-    public List<Student> findAllStudent(){
-        return studentService.findAllStudents();
+    public List<StudentResponse> findAllStudent(){
+        List<Student> students = studentService.findAllStudents();
+        return students.stream().map(studentService::ConvertStudentToStudentResponse).collect(Collectors.toList());
     }
 
     @GetMapping("/studentCourses")
-    public ResponseEntity<Student> findStudentByNameAndFollowedCourses(@RequestParam String firstname, @RequestParam String lastname) {
-        // TODO Matteo
-        return ResponseEntity.ok().build();
+    public ResponseEntity<StudentResponse> findStudentByNameAndFollowedCourses(@RequestParam String firstname, @RequestParam String lastname) {
+        Optional<Student> findStudent = studentService.findStudentByFirstnameAndLastName(firstname, lastname);
+        return findStudent.map(
+                student -> ResponseEntity.ok(this.studentService.ConvertStudentToStudentResponse(student)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/studentMarkLessOrEqual")
+    public List<StudentResponse> findAllStudentsWithEvaluationLessOrEqual(@RequestParam Integer mark){
+        List<Student> students = studentService.findAllStudentsWithEvaluationLessOrEqual(mark);
+        return students.stream().map(studentService::ConvertStudentToStudentResponse).collect(Collectors.toList());
     }
 }
