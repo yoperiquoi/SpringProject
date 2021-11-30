@@ -1,4 +1,4 @@
-package fr.imta.fil.markentry.follow;
+package fr.imta.fil.markentry.model;
 
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -12,7 +12,7 @@ public class CourseRef {
     public CourseRef(){
     }
 
-    public CourseRef(Integer courseId, String name){
+    public CourseRef(Integer courseId){
         this.courseId = courseId;
     }
 

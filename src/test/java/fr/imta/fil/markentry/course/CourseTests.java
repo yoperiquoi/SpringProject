@@ -1,4 +1,5 @@
 package fr.imta.fil.markentry.course;
+import fr.imta.fil.markentry.model.Course;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

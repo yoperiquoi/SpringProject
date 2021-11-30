@@ -1,4 +1,4 @@
-package fr.imta.fil.markentry.student;
+package fr.imta.fil.markentry.model;
 
 public class StudentEvaluationForm {
 

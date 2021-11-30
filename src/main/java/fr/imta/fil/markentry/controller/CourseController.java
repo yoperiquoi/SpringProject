@@ -1,6 +1,10 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.controller;
 
 
+import fr.imta.fil.markentry.model.Course;
+import fr.imta.fil.markentry.model.CourseForm;
+import fr.imta.fil.markentry.model.CourseResponse;
+import fr.imta.fil.markentry.service.CourseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

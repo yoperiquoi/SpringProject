@@ -1,7 +1,7 @@
-package fr.imta.fil.markentry.follow;
+package fr.imta.fil.markentry.repository;
 
-import fr.imta.fil.markentry.student.Student;
-import fr.imta.fil.markentry.student.StudentEvaluationForm;
+import fr.imta.fil.markentry.model.Student;
+import fr.imta.fil.markentry.model.StudentEvaluationForm;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

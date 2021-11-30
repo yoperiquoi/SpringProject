@@ -1,6 +1,6 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.repository;
 
-import org.springframework.data.jdbc.repository.query.Query;
+import fr.imta.fil.markentry.model.Course;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

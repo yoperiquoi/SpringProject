@@ -1,8 +1,9 @@
-package fr.imta.fil.markentry.student;
+package fr.imta.fil.markentry.controller;
 
-import fr.imta.fil.markentry.course.Course;
-import fr.imta.fil.markentry.course.CourseController;
-import fr.imta.fil.markentry.course.CourseService;
+import fr.imta.fil.markentry.model.Student;
+import fr.imta.fil.markentry.model.StudentEvaluationForm;
+import fr.imta.fil.markentry.model.StudentResponse;
+import fr.imta.fil.markentry.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

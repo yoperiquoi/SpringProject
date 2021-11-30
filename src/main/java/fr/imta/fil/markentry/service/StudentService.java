@@ -1,16 +1,16 @@
-package fr.imta.fil.markentry.student;
+package fr.imta.fil.markentry.service;
 
-import fr.imta.fil.markentry.course.Course;
-import fr.imta.fil.markentry.course.CourseRepository;
-import fr.imta.fil.markentry.course.CourseResponse;
-import fr.imta.fil.markentry.course.CourseService;
-import fr.imta.fil.markentry.follow.CourseRef;
-import fr.imta.fil.markentry.follow.FollowRepository;
-import fr.imta.fil.markentry.follow.StudentRef;
+import fr.imta.fil.markentry.model.Course;
+import fr.imta.fil.markentry.repository.CourseRepository;
+import fr.imta.fil.markentry.model.CourseRef;
+import fr.imta.fil.markentry.repository.FollowRepository;
+import fr.imta.fil.markentry.model.Student;
+import fr.imta.fil.markentry.model.StudentEvaluationForm;
+import fr.imta.fil.markentry.repository.StudentRepository;
+import fr.imta.fil.markentry.model.StudentResponse;
 import fr.imta.fil.markentry.utils.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,4 @@
-package fr.imta.fil.markentry.student;
-
-import fr.imta.fil.markentry.course.Course;
+package fr.imta.fil.markentry.model;
 
 import java.util.Set;
 

@@ -1,7 +1,6 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.model;
 
-import fr.imta.fil.markentry.follow.StudentRef;
-import fr.imta.fil.markentry.student.Student;
+import fr.imta.fil.markentry.model.StudentRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -9,7 +8,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

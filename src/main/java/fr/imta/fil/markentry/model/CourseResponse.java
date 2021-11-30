@@ -1,19 +1,26 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.model;
 
-import fr.imta.fil.markentry.student.Student;
+import fr.imta.fil.markentry.model.Student;
 
-import java.util.List;
 import java.util.Set;
 
-public class CourseForm {
+public class CourseResponse {
 
-    private Integer courseId;
+    public Integer courseId;
 
-    private String title;
+    public String title;
 
-    private String description;
+    public String description;
 
-    private Set<Student> students;
+    public Set<Student> students;
+
+    public CourseResponse() {}
+
+    public CourseResponse(Integer courseId, String title, String description){
+        this.courseId = courseId;
+        this.title = title;
+        this.description = description;
+    }
 
     public Integer getCourseId() {
         return courseId;
