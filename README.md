@@ -262,7 +262,9 @@ Response :
 ### Contact
 
 You can contact us via our school email :
+
 Yoann PERIQUOI : yoann.periquoi@imt-atlantique.net
 Matteo ORDRENNEAU : matteo.ordrenneau@imt-atlantique.net
 Jules CARPIO : jules.carpio@imt-atlantique.net
 
+<p align="right">(<a href="#top">back to top</a>)</p>
