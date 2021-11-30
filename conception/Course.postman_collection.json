@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "edc5c638-7f5d-4df3-b297-d13bb3979002",
+		"name": "Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get course by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{source_url}}/course/courses/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{source_url}}/course/courses"
+			},
+			"response": []
+		},
+		{
+			"name": "Add course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"courseId\": 8,\n    \"title\": \"test\",\n    \"description\": \"test\",\n    \"students\" : [\n        {\n            \"studentId\": 13,\n            \"firstname\": \"test\",\n            \"lastname\": \"test\"\n        },\n        {\n            \"studentId\": 14,\n            \"firstname\": \"test\",\n            \"lastname\": \"test\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{source_url}}/course/courses",
+					"host": [
+						"{{source_url}}"
+					],
+					"path": [
+						"course",
+						"courses"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Discrete maths",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "Mastering of COQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Request existing",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{source_url}}/course/courses/8"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Request non existing",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{source_url}}/course/courses/12"
+			},
+			"response": []
+		}
+	]
+}
