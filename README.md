@@ -91,6 +91,8 @@ spring:
     driver-class-name: org.postgresql.Driver
 ```
 
+Than you can load example data using the create-databases.sql scripts.
+
 ### Installation
 
 1. Clone the repo.
