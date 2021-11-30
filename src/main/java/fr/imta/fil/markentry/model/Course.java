@@ -1,12 +1,13 @@
-package fr.imta.fil.markentry.course;
+package fr.imta.fil.markentry.model;
 
-import fr.imta.fil.markentry.follow.StudentRef;
+import fr.imta.fil.markentry.model.StudentRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -51,9 +52,9 @@ public class Course implements Persistable<Integer> {
     }
 
     @MappedCollection(idColumn = "course_id", keyColumn = "course_id")
-    private Set<StudentRef> students;
+    private Set<StudentRef> students = new HashSet<>();
 
-    public void addCourse(StudentRef studentRef) {
+    public void addStudent(StudentRef studentRef) {
         students.add(studentRef);
     }
 

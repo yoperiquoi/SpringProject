@@ -1,6 +1,5 @@
-package fr.imta.fil.markentry.student;
+package fr.imta.fil.markentry.model;
 
-import fr.imta.fil.markentry.follow.CourseRef;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -32,7 +31,7 @@ public class Student implements Persistable<Integer> {
     private boolean isNew;
 
     @MappedCollection(idColumn = "student_id", keyColumn = "student_id")
-    private Set<CourseRef> courses;
+    private Set<CourseRef> courses = new HashSet<>();
 
     public void addCourse(CourseRef courseRef) {
         courses.add(courseRef);

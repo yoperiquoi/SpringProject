@@ -1,4 +1,4 @@
-package fr.imta.fil.markentry.follow;
+package fr.imta.fil.markentry.model;
 
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
