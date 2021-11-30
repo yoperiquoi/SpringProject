@@ -54,6 +54,10 @@ public class Course implements Persistable<Integer> {
     @MappedCollection(idColumn = "course_id", keyColumn = "course_id")
     private Set<StudentRef> students = new HashSet<>();
 
+    /**
+     * Allows to add a student in the students Set of the course link to follow.
+     * @param studentRef
+     */
     public void addStudent(StudentRef studentRef) {
         students.add(studentRef);
     }
@@ -124,10 +128,18 @@ public class Course implements Persistable<Integer> {
         isNew = aNew;
     }
 
+    /**
+     * Getter of the students collection
+     * @return all the student
+     */
     public Set<StudentRef> getStudents() {
         return students;
     }
 
+    /**
+     * Allows to change the list of the students
+     * @param students the new student list of the course
+     */
     public void setStudents(Set<StudentRef> students) {
         this.students = students;
     }

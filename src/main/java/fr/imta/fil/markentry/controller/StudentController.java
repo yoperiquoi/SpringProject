@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * This class is the student controller which use a student service
+ * @author Yoann Periquoi, Matteo Ordrenneau, Jules Carpio.
+ * @version 1.0
+ * @since 29/11/2021
+ *
+ */
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
@@ -21,11 +28,20 @@ public class StudentController {
 
     private StudentService studentService;
 
+    /**
+     * Constructor method
+     * @param studentService the used student service
+     */
     @Autowired
     public StudentController(StudentService studentService){
         this.studentService = studentService;
     }
 
+    /**
+     * Allows find a student according to his id
+     * @param studentId the student id
+     * @return the wanted student
+     */
     @GetMapping("/students/{studentId}")
     public ResponseEntity<StudentResponse> findStudentId(@PathVariable("studentId") Integer studentId){
         Optional<Student> findStudentById = studentService.findStudentById(studentId);
@@ -38,6 +54,10 @@ public class StudentController {
         }
     }
 
+    /**
+     * Allows to have all the student
+     * @return list of student
+     */
     @GetMapping("/students")
     public List<StudentResponse> findAllStudent(){
         LOGGER.info("Get all the students");
@@ -45,6 +65,12 @@ public class StudentController {
         return students.stream().map(studentService::ConvertStudentToStudentResponse).collect(Collectors.toList());
     }
 
+    /**
+     * Allows to get the student and his courses
+     * @param firstname String
+     * @param lastname String
+     * @return the student with his courses
+     */
     @GetMapping("/studentCourses")
     public ResponseEntity<StudentResponse> findStudentByNameAndFollowedCourses(@RequestParam String firstname, @RequestParam String lastname) {
         Optional<Student> findStudent = studentService.findStudentByFirstnameAndLastName(firstname, lastname);
@@ -57,6 +83,11 @@ public class StudentController {
         }
     }
 
+    /**
+     * Find students according to their evaluation
+     * @param mark the wanted evaluation
+     * @return list of students
+     */
     @GetMapping("/studentMarkLessOrEqual")
     public List<StudentResponse> findAllStudentsWithEvaluationLessOrEqual(@RequestParam Integer mark){
         LOGGER.info("Get all the students with mark less or equals than " + mark);
@@ -64,6 +95,11 @@ public class StudentController {
         return students.stream().map(studentService::ConvertStudentToStudentResponse).collect(Collectors.toList());
     }
 
+    /**
+     * Allows to change a student evalation
+     * @param studentEvaluationForm the new student
+     * @return Response entity
+     */
     @PatchMapping("/modifyStudentEvaluation")
     public ResponseEntity<String> modifyStudentEvaluation(@RequestBody StudentEvaluationForm studentEvaluationForm){
         if(studentService.modifyStudentEvaluation(studentEvaluationForm)){

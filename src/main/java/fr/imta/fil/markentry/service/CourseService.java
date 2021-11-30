@@ -19,6 +19,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * This class is used by the course controller to process data of the repository
+ * @author Yoann Periquoi, Matteo Ordrenneau, Jules Carpio.
+ * @version 1.0
+ * @since 29/11/2021
+ *
+ */
 @Service
 public class CourseService {
 
@@ -28,20 +35,39 @@ public class CourseService {
 
     private StudentRepository studentRepository;
 
+    /**
+     * Constructor
+     * @param courseRepository the course repository
+     * @param studentRepository the student repository to mainly find student id
+     */
     @Autowired
     public CourseService(CourseRepository courseRepository, StudentRepository studentRepository){
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
     }
 
+    /**
+     * Allows to find a course knowing its id
+     * @param id the id of the intended course
+     * @return the course
+     */
     public Optional<Course> findCourseById(int id){
         return courseRepository.findById(id);
     }
 
+    /**
+     * Allows to find and return all the course as a list
+     * @return a list of course
+     */
     public List<Course> findAllCourses(){
         return ListUtils.asList(courseRepository.findAll());
     }
 
+    /**
+     * Allows to add a course, and add the student id in if the student exist
+     * @param courseForm the course to add
+     * @return the statut of the transactionnal method
+     */
     @Transactional(rollbackFor = Exception.class)
     public boolean addCourse(CourseForm courseForm) throws Exception{
         if(this.courseRepository.findById(courseForm.getCourseId()).isPresent()){
@@ -65,6 +91,11 @@ public class CourseService {
         }
     }
 
+    /**
+     * Allows to delete a course
+     * @param id the course id
+     * @return string
+     */
     public String deleteCourseById(Integer id){
         try {
             courseRepository.deleteById(id);
@@ -76,8 +107,13 @@ public class CourseService {
         return "Le cours à été supprimé";
     }
 
+    /**
+     * Allows to convert the course to a response course
+     * @param course the course to convert
+     * @return the courseResponse associated to the course
+     */
     public CourseResponse ConvertCourseToCourseResponse(Course course) {
-        CourseResponse courseResponse = new CourseResponse(course.getId(), course.getTitle(), course.getDescription());
+        CourseResponse courseResponse = new CourseResponse(course.getId(), course.getTitle(), course.getDescription());//Obligé de faire ça car nous ne pouvons renvoyer le course objet
         Set<Student> students = new HashSet<>();
         for(StudentRef studentRef : course.getStudents()){
             Optional<Student> findStudent = this.studentRepository.findById(studentRef.getStudentId());
@@ -87,6 +123,11 @@ public class CourseService {
         return courseResponse;
     }
 
+    /**
+     * Method which allows to check if every content is present in the request.
+     * @param courseForm the request course
+     * @return a boolean
+     */
     public boolean validateRequestBody(CourseForm courseForm) {
         boolean valid = (
             courseForm.getCourseId() != null

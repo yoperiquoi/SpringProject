@@ -14,6 +14,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * This class is the course controller which use a course service
+ * @author Yoann Periquoi, Matteo Ordrenneau, Jules Carpio.
+ * @version 1.0
+ * @since 29/11/2021
+ *
+ */
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
@@ -22,11 +29,20 @@ public class CourseController {
 
     private CourseService courseService;
 
+    /**
+     * Constructor method.
+     * @param courseService - a course service
+     */
     @Autowired
     public CourseController(CourseService courseService){
         this.courseService = courseService;
     }
 
+    /**
+     * Method which use a course service to find the course according to it id.
+     * @param id the course id
+     * @return the course
+     */
     @GetMapping("/courses/{courseId}")
     public ResponseEntity<CourseResponse> findCourseId(@PathVariable("courseId") int id){
         Optional<Course> courseById = courseService.findCourseById(id);
@@ -39,13 +55,22 @@ public class CourseController {
         }
     }
 
+    /**
+     * Allows to get all the courses
+     * @return all the courses
+     */
     @GetMapping("/courses")
     public List<CourseResponse> findAllCourse(){
         LOGGER.info("Get all the courses");
         List<Course> courses = courseService.findAllCourses();
-        return courses.stream().map(courseService::ConvertCourseToCourseResponse).collect(Collectors.toList());
+        return courses.stream().map(courseService::ConvertCourseToCourseResponse).collect(Collectors.toList());//collect allows to stock the course in a list
     }
 
+    /**
+     * Allows to add a course thanks a request
+     * @param courseForm the course request
+     * @return a response entity
+     */
     @PostMapping("/courses")
     public ResponseEntity<String> addCourse(@RequestBody CourseForm courseForm){
         if(courseService.validateRequestBody(courseForm)){
@@ -68,6 +93,11 @@ public class CourseController {
         }
     }
 
+    /**
+     * Allows to delete a course
+     * @param id the deleted course
+     * @return ResponseEntity
+     */
     @DeleteMapping("/courses/{courseId}")
     public ResponseEntity<String> delete(@PathVariable("courseId") Integer id){
         if(courseService.findCourseById(id).isPresent()){
