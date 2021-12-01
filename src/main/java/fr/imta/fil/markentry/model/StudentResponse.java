@@ -103,10 +103,18 @@ public class StudentResponse {
         this.courses = courses;
     }
 
+    /**
+     * Getter of evaluation
+     * @return evaluation the hashmap of evaluations
+     */
     public HashMap<Integer, Integer> getEvaluation() {
         return evaluation;
     }
 
+    /**
+     * Setter of evaluation
+     * @param evaluation the new hashmap of evaluations
+     */
     public void setEvaluation(HashMap<Integer, Integer> evaluation) {
         this.evaluation = evaluation;
     }
