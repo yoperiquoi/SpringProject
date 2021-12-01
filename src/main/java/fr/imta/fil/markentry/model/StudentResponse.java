@@ -1,5 +1,6 @@
 package fr.imta.fil.markentry.model;
 
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -18,6 +19,8 @@ public class StudentResponse {
     private String lastname;
 
     private Set<Course> courses;
+
+    private HashMap<Integer, Integer> evaluation;
 
     /**
      * Empty constructor method to instantiate automatically the spring applicaiton
@@ -98,5 +101,13 @@ public class StudentResponse {
      */
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public HashMap<Integer, Integer> getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(HashMap<Integer, Integer> evaluation) {
+        this.evaluation = evaluation;
     }
 }

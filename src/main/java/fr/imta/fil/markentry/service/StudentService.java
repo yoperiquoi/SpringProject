@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class is used by the student controller to process data of the repository
@@ -108,11 +105,15 @@ public class StudentService {
     public StudentResponse ConvertStudentToStudentResponse(Student student) {
         StudentResponse studentResponse = new StudentResponse(student.getId(), student.getFirstname(), student.getLastname());
         Set<Course> courses = new HashSet<>();
+        HashMap<Integer, Integer> evaluations = new HashMap<>();
         for(CourseRef courseRef : student.getCourses()){
             Optional<Course> findCourse = this.courseRepository.findById(courseRef.getCourseId());
             findCourse.ifPresent(courses::add);
+            Optional<Integer> findEvaluation = this.followRepository.getStudentEvaluation(student.getId(), courseRef.getCourseId());
+            findEvaluation.ifPresent(integer -> evaluations.put(courseRef.getCourseId(), integer));
         }
         studentResponse.setCourses(courses);
+        studentResponse.setEvaluation(evaluations);
         return studentResponse;
     }
 }
