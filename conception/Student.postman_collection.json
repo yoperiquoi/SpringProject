@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "7746bb1b-1aca-4f6e-ba74-70001ba33ee5",
+		"name": "Student",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get student by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{source_url}}/student/students/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get student by firstname and lastname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{source_url}}/student/studentCourses?firstname=Matteo&lastname=ORDRENNEAU",
+					"host": [
+						"{{source_url}}"
+					],
+					"path": [
+						"student",
+						"studentCourses"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Matteo"
+						},
+						{
+							"key": "lastname",
+							"value": "ORDRENNEAU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get students under a certain mark",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{source_url}}/student/studentMarkLessOrEqual?mark=10",
+					"host": [
+						"{{source_url}}"
+					],
+					"path": [
+						"student",
+						"studentMarkLessOrEqual"
+					],
+					"query": [
+						{
+							"key": "mark",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{source_url}}/student/students"
+			},
+			"response": []
+		},
+		{
+			"name": "Add student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{source_url}}/student/students?firstname=Herve&lastname=GRALL",
+					"host": [
+						"{{source_url}}"
+					],
+					"path": [
+						"student",
+						"students"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Herve"
+						},
+						{
+							"key": "lastname",
+							"value": "GRALL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add student Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"evaluation\": 20,\r\n    \"studentId\": 13,\r\n    \"courseId\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{source_url}}/student/modifyStudentEvaluation"
+			},
+			"response": []
+		}
+	]
+}

@@ -70,19 +70,25 @@ public class CourseService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean addCourse(CourseForm courseForm) throws Exception{
+        // Checking if the course id doesn't exist
         if(this.courseRepository.findById(courseForm.getCourseId()).isPresent()){
+            // If it exists we throw an exception and log the error
             LOGGER.warn("A course with id " + courseForm.getCourseId() + " already exits");
             throw new Exception("A course with id " + courseForm.getCourseId() + " already exits");
         } else {
             try {
+                // Else we can start trying to add the course
                 Course course = new Course(courseForm.getCourseId(), courseForm.getTitle(), courseForm.getDescription());
+                // Try to add the student to the course followers
                 for(Student student : courseForm.getStudents()){
                     if(this.studentRepository.findById(student.getId()).isEmpty()){
+                        // If the student doesn't exist we add him to the students
                         LOGGER.info("The student with id " + student.getId() + " has been added");
                         this.studentRepository.save(student);
                     }
                     course.addStudent(new StudentRef(student.getId()));
                 }
+                //To finish we save the new course with his followers
                 courseRepository.save(course);
                 return true;
             } catch (Exception e) {
