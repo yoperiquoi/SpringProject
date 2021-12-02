@@ -2,6 +2,7 @@ package fr.imta.fil.markentry.course;
 
 
 import fr.imta.fil.markentry.model.Course;
+import fr.imta.fil.markentry.model.CourseResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -23,6 +24,16 @@ public class CourseControllerTest {
     TestRestTemplate testRestTemplate = new TestRestTemplate();
     String CONTROLLER_BASE_URL = "http://localhost:8080/api/course";
 
+    /*
+    @Test
+    void tryGetTables(){
+        RequestEntity<?> request = RequestEntity.get(CONTROLLER_BASE_URL + "/tables").build();
+        ResponseEntity<String> response = testRestTemplate.exchange(request, String.class);
+        System.out.println(response);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+    */
+
     @Test
     void test_get_course(){
         int courseId = 2;
@@ -31,6 +42,12 @@ public class CourseControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    @Test
+    void test_get_courses(){
+        RequestEntity<?> request = RequestEntity.get(CONTROLLER_BASE_URL + "/courses").build();
+        ResponseEntity<String> response = testRestTemplate.exchange(request, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 
 
 }

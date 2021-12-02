@@ -1,20 +1,20 @@
-CREATE TABLE Student (
-                         STUDENT_ID INT PRIMARY KEY,
-                         FIRSTNAME VARCHAR NOT NULL,
-                         LASTNAME VARCHAR NOT NULL
+CREATE TABLE student (
+                         student_id INT PRIMARY KEY,
+                         firstname VARCHAR NOT NULL,
+                         lastname VARCHAR NOT NULL
 );
 
 CREATE TABLE course (
-                        COURSE_ID INT PRIMARY KEY,
-                        TITLE VARCHAR NOT NULL,
-                        DESCRIPTION VARCHAR NOT NULL
+                        course_id INT PRIMARY KEY,
+                        title VARCHAR NOT NULL,
+                        description VARCHAR NOT NULL
 );
 
 CREATE TABLE follow (
-                        STUDENT_ID INT NOT NULL,
-                        COURSE_ID INT NOT NULL,
+                        student_id INT NOT NULL,
+                        course_id INT NOT NULL,
                         evaluation INT CHECK (evaluation>=0 AND evaluation<=20),
-                        CONSTRAINT PK_Follow PRIMARY KEY(STUDENT_ID,COURSE_ID),
-                        CONSTRAINT FK_Student FOREIGN KEY (STUDENT_ID) REFERENCES Student(STUDENT_ID),
-                        CONSTRAINT FK_Course FOREIGN KEY (COURSE_ID) REFERENCES course(COURSE_ID)
+                        CONSTRAINT pk_follow PRIMARY KEY(student_id,course_id),
+                        CONSTRAINT fk_student FOREIGN KEY (student_id) REFERENCES student(student_id),
+                        CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES course(course_id)
 );

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface FollowRepository extends CrudRepository<Student,Integer> {
 
-    @Query("UPDATE follow f SET evaluation = :mark WHERE f.student_id = :student_id AND f.course_id = 8 RETURNING *;")
+    @Query("UPDATE follow f SET evaluation = :mark WHERE f.student_id = :student_id AND f.course_id = :course_id RETURNING *;")
     StudentEvaluationForm modifyStudentEvaluation(@Param("mark") Integer mark, @Param("student_id") Integer studentId, @Param("course_id") Integer courseId);
 
     @Query("SELECT evaluation FROM follow f WHERE f.student_id = :student_id AND f.course_id = :course_id;")

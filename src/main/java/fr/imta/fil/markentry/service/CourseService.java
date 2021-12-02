@@ -34,7 +34,6 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     private StudentRepository studentRepository;
-
     /**
      * Constructor
      * @param courseRepository the course repository

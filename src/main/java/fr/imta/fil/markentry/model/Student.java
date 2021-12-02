@@ -3,6 +3,7 @@ package fr.imta.fil.markentry.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -21,10 +22,13 @@ public class Student implements Persistable<Integer> {
 
 
     @Id
+    @Column("student_id")
     private int studentId;
 
+    @Column("firstname")
     private String firstname;
 
+    @Column("lastname")
     private String lastname;
 
     @Transient

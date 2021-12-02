@@ -14,6 +14,6 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query("SELECT * FROM student s WHERE s.firstname = :firstname AND s.lastname = :lastname;")
     Optional<Student> findStudentByName(@Param("firstname") String firstname, @Param("lastname") String lastname);
 
-    @Query("SELECT * FROM student where student_id = (SELECT student_id Unique FROM Follow WHERE evaluation <= :mark);")
+    @Query("SELECT * FROM student where student_id IN (SELECT student_id UNIQUE FROM follow WHERE evaluation <= :mark);")
     Iterable<Student> findAllStudentWithMarkLessOrEqual(@Param("mark") Integer mark);
 }
