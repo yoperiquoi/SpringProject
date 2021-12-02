@@ -1,6 +1,5 @@
 package fr.imta.fil.markentry.student;
 
-import fr.imta.fil.markentry.model.StudentEvaluationForm;
 import fr.imta.fil.markentry.model.StudentResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,7 +42,6 @@ public class StudentControllerTest {
         ResponseEntity<StudentResponse> response = testRestTemplate.exchange(request, StudentResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
-
 
 
 }

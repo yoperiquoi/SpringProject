@@ -29,16 +29,6 @@ public class CourseControllerTest {
     TestRestTemplate testRestTemplate = new TestRestTemplate();
     String CONTROLLER_BASE_URL = "http://localhost:8080/api/course";
 
-    /*
-    @Test
-    void tryGetTables(){
-        RequestEntity<?> request = RequestEntity.get(CONTROLLER_BASE_URL + "/tables").build();
-        ResponseEntity<String> response = testRestTemplate.exchange(request, String.class);
-        System.out.println(response);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
-    */
-
     @Test
     void test_get_course(){
         int courseId = 1;
