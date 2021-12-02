@@ -36,8 +36,12 @@ public class StudentControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
-
-
+    @Test
+    void test_get_studentCourses(){
+        RequestEntity<?> request = RequestEntity.get(CONTROLLER_BASE_URL + "/studentCourses?firstname=Matteo&lastname=ORDRENNEAU").build();
+        ResponseEntity<StudentResponse> response = testRestTemplate.exchange(request, StudentResponse.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 
 
 }
