@@ -1,0 +1,8 @@
+fr.imta.fil.markentry
+fr.imta.fil.markentry.controller
+fr.imta.fil.markentry.course
+fr.imta.fil.markentry.model
+fr.imta.fil.markentry.repository
+fr.imta.fil.markentry.service
+fr.imta.fil.markentry.student
+fr.imta.fil.markentry.utils

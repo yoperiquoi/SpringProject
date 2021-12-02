@@ -107,9 +107,9 @@ public class CourseService {
             LOGGER.info("The course " + id + " has been deleted");
         } catch (Exception e) {
             LOGGER.error("There has been an error deleting the course " + id + " : " + e.getMessage());
-            return "Un erreur est survenue : " + e.getMessage();
+            return "An error append : " + e.getMessage();
         }
-        return "Le cours à été supprimé";
+        return "The course have been deleted";
     }
 
     /**
