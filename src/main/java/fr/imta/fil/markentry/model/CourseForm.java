@@ -22,6 +22,17 @@ public class CourseForm {
 
     private Set<Student> students;
 
+    public CourseForm(){
+
+    }
+
+    public CourseForm(Integer courseId, String title, String description, Set<Student> students) {
+        this.courseId = courseId;
+        this.title = title;
+        this.description = description;
+        this.students = students;
+    }
+
     /**
      * Getter of courseId
      * @return a course id
